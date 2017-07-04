@@ -27,7 +27,10 @@
                  (close)="onCloseImageModal($event)"
                  (show)="onVisibleIndex($event)"
                  (firstImage)="onIsFirstImage($event)"
-                 (lastImage)="onIsLastImage($event)"></modal-gallery>
+                 (lastImage)="onIsLastImage($event)"
+                 [customButtonConfig]="{class:'fa fa-trash'}"
+                 (customButtonClicked)="onCustomButtonClicked($event)">
+                 ></modal-gallery>
 </section>
 <section id="Images31-2">
   <h3>2 - Observable of images with delay(300) + download (both 'ctrl+s' and button) <span class="red-text">with 'buttonsConfig' and 'keyboardConfig'</span></h3>

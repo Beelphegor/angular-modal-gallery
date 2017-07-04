@@ -53,6 +53,13 @@ export class ImageModalEvent {
   }
 }
 
+export class CustomButtonEvent {
+  image: Image;
+  constructor(image: Image) {
+    this.image = image;
+  }
+}
+
 /**
  * Class `Image` that represents an Image with both images and thumb paths,
  * also with a description and an external url.
@@ -63,13 +70,15 @@ export class Image {
   thumb?: string | null | undefined;
   description?: string | null | undefined;
   extUrl?: string | null | undefined;
-
+  identifier?: string | null |undefined;
+  
   constructor(img: string, thumb?: string | null | undefined,
-              description?: string | null | undefined, extUrl?: string | null | undefined) {
+              description?: string | null | undefined, extUrl?: string | null | undefined, identifier?: string | null | undefined) {
     this.img = img;
     this.thumb = thumb;
     this.description = description;
     this.extUrl = extUrl;
+    this.identifier = identifier;
   }
 }
 
@@ -111,6 +120,10 @@ export interface KeyboardConfig {
   esc?: number;
   right?: number;
   left?: number;
+}
+
+export interface CustomButtonConfig {
+  class: string;
 }
 
 /**
@@ -159,6 +172,8 @@ export class AngularModalGalleryComponent implements OnInit, OnDestroy, OnChange
    */
   @Input() enableCloseOutside: boolean = false;
 
+  @Input() customButtonConfig: CustomButtonConfig;
+
   /**
    * DEPRECATED
    * -----REMOVE THIS IN 4.0.0----- deprecated both showDownloadButton and showExtUrlButton
@@ -175,6 +190,7 @@ export class AngularModalGalleryComponent implements OnInit, OnDestroy, OnChange
   @Output() firstImage: EventEmitter<ImageModalEvent> = new EventEmitter<ImageModalEvent>();
   @Output() lastImage: EventEmitter<ImageModalEvent> = new EventEmitter<ImageModalEvent>();
   @Output() hasData: EventEmitter<ImageModalEvent> = new EventEmitter<ImageModalEvent>();
+  @Output() customButtonClicked: EventEmitter<CustomButtonEvent> = new EventEmitter<CustomButtonEvent>();
 
   /**
    * Boolean that it is true if the modal gallery is visible
@@ -434,6 +450,10 @@ export class AngularModalGalleryComponent implements OnInit, OnDestroy, OnChange
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+
+  onCustomButtonClicked() {
+    this.customButtonClicked.emit(new CustomButtonEvent(this.currentImage));
   }
 
   /**

@@ -23,7 +23,7 @@
  */
 
 import { Input, Output, EventEmitter, Component } from '@angular/core';
-import { Image, ButtonsConfig } from './modal-gallery.component';
+import { Image, ButtonsConfig, CustomButtonConfig, CustomButtonEvent } from './modal-gallery.component';
 
 /**
  * Component with all upper right buttons.
@@ -39,9 +39,11 @@ export class UpperButtonsComponent {
 
   @Input() image: Image;
   @Input() configButtons: ButtonsConfig;
+  @Input() customButtonConfig: CustomButtonConfig;
 
   @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() download: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() customButtonClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   downloadImage() {
     this.download.emit(true);
@@ -49,5 +51,9 @@ export class UpperButtonsComponent {
 
   closeGallery() {
     this.close.emit(true);
+  }
+
+  onCustomEventClicked() {
+    this.customButtonClicked.emit(true);
   }
 }
