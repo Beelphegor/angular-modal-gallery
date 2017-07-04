@@ -53,7 +53,6 @@ jspm_packages
 .DS_Store
 Thumbs.db
 
-aot
 .awcache
 
 *.metadata.json
@@ -61,7 +60,6 @@ aot
 *.ngsummary.json
 index.js
 index.js.map
-bundles
 
 demo/systemjs/**/*.js
 demo/systemjs/**/*.map
