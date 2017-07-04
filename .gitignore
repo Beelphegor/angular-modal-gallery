@@ -66,6 +66,4 @@ demo/systemjs/**/*.map
 
 demo/webpack/docs/
 
-bundle
-
 docs
